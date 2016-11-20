@@ -45520,6 +45520,56 @@ ohauth$1.headerGenerator = function(options) {
 
 var index$12 = ohauth$1;
 
+var resolveUrl$1 = createCommonjsModule(function (module, exports) {
+// Copyright 2014 Simon Lydell
+// X11 (“MIT”) Licensed. (See LICENSE.)
+
+void (function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(factory);
+  } else if (typeof exports === "object") {
+    module.exports = factory();
+  } else {
+    root.resolveUrl = factory();
+  }
+}(commonjsGlobal, function() {
+
+  function resolveUrl(/* ...urls */) {
+    var numUrls = arguments.length;
+
+    if (numUrls === 0) {
+      throw new Error("resolveUrl requires at least one argument; got none.")
+    }
+
+    var base = document.createElement("base");
+    base.href = arguments[0];
+
+    if (numUrls === 1) {
+      return base.href
+    }
+
+    var head = document.getElementsByTagName("head")[0];
+    head.insertBefore(base, head.firstChild);
+
+    var a = document.createElement("a");
+    var resolved;
+
+    for (var index = 1; index < numUrls; index++) {
+      a.href = arguments[index];
+      resolved = a.href;
+      base.href = resolved;
+    }
+
+    head.removeChild(base);
+
+    return resolved
+  }
+
+  return resolveUrl
+
+}));
+});
+
 var store$1 = createCommonjsModule(function (module, exports) {
 "use strict"
 // Module export pattern from
@@ -45715,8 +45765,10 @@ var store$1 = createCommonjsModule(function (module, exports) {
 });
 
 var ohauth = index$12;
-var xtend = immutable;
+var resolveUrl = resolveUrl$1;
 var store = store$1;
+var xtend = immutable;
+
 
 // # osm-auth
 //
@@ -45778,8 +45830,7 @@ var index$11 = function(o) {
             token('oauth_request_token_secret', resp.oauth_token_secret);
             var authorize_url = o.url + '/oauth/authorize?' + ohauth.qsString({
                 oauth_token: resp.oauth_token,
-                oauth_callback: location.href.replace('index.html', '')
-                    .replace(/#.*/, '').replace(location.search, '') + o.landing
+                oauth_callback: resolveUrl(o.landing)
             });
 
             if (o.singlepage) {
@@ -45923,7 +45974,7 @@ var index$11 = function(o) {
         if (!arguments.length) return o;
 
         o = _;
-        o.url = o.url || 'http://www.openstreetmap.org';
+        o.url = o.url || 'https://www.openstreetmap.org';
         o.landing = o.landing || 'land.html';
         o.singlepage = o.singlepage || false;
 
