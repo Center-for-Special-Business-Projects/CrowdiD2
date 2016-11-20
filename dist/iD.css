@@ -1835,7 +1835,8 @@ body {
 }
 
 #content {
-    position: relative;
+/*Monduiz change position from relative to static */
+    position: static;
     overflow: hidden;
     height: 100%;
 }
@@ -2343,7 +2344,8 @@ button.save.has-count .count::before {
     position: fixed;
     padding: 10px 0;
     left:0;
-    top:0;
+    /*Monduiz change position of toolbar, top:50 instead of zero*/
+    top:50px;
     right:0;
     height:60px;
     z-index: 9;
@@ -3583,7 +3585,8 @@ div.full-screen > button:hover {
 
 .map-controls {
     right: 0;
-    top: 70px;
+    /*Monduiz change position top 70 to 130*/
+    top: 130px;
     width: 40px;
     position: fixed;
     z-index: 100;

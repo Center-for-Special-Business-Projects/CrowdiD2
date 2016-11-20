@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import {
     modeAddArea,
-    modeAddLine,
+    //Monduiz remove AddLine: modeAddLine,
     modeAddPoint,
     modeBrowse
 } from '../modes/index';
@@ -16,7 +16,7 @@ import { uiTooltipHtml } from './tooltipHtml';
 export function uiModes(context) {
     var modes = [
         modeAddPoint(context),
-        modeAddLine(context),
+       //Monduiz modeAddLine(context),
         modeAddArea(context)
     ];
 
