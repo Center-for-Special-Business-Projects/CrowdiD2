@@ -46130,8 +46130,8 @@ var loadedTiles = {};
 var tileZoom$1 = 16;
 var oauth = index$11({
         url: urlroot,
-         oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-         oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
+         oauth_consumer_key: 'vipmCfofimB8AAiPYzR77FOMrXoACVYpjuGCNzN2',
+         oauth_secret: 'VuaPLj8ckfgTceT3j4JXiNPGGyQHLN0DNVxB7byd',
         loading: authLoading,
         done: authDone
     });
